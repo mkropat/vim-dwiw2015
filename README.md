@@ -47,7 +47,8 @@ package](https://chocolatey.org/)?*
 ### Plug-in Only
 
 If you already have Vundle set up and the plug-ins you want installed, you can
-include just the *dwiw2015* plug-in by adding the following line to your `.vimrc`:
+include just the **dwiw2015.vim** plug-in by adding the following line to your
+`.vimrc`:
 
     Bundle 'mkropat/vim-dwiw2015'
 
@@ -62,8 +63,8 @@ The authoritative source for the provided default settings is the
 
 ### New Key Shortcuts
 
-**dwiw2015.vim** adds in the most ubiquitous editor shortcuts, and updates the
-behavior of some old key mappings to act a little more modern.
+**dwiw2015.vim** adds in the most ubiquitous editor shortcuts, and makes some
+old key mappings act a little more modern.
 
 #### All Modes
 
@@ -117,7 +118,7 @@ loads *after* your `.vimrc`, which makes anything it sets override the previous
 setting.  The way to get around this is to add a line to your `.vimrc` that
 forces **dwiw2015.vim** to load before you set your settings:
 
-    runtime! plug-in/dwiw2015.vim
+    runtime! plugin/dwiw2015.vim
     " <your settings here>
 
 ## Modern Features
@@ -126,9 +127,9 @@ forces **dwiw2015.vim** to load before you set your settings:
 
 Install packages straight from Vim at any time with
 [Vundle](https://github.com/gmarik/Vundle.vim).  For example, to install Tim
-Pope's fantastic Git wrapper, available on Github at 'tpope/vim-fugitive',
-simply add `Bundle 'tpope/vim-fugitive'` to your `.vimrc` and run
-`:BundleInstall`.
+Pope's fantastic Git wrapper, available on Github at
+[tpope/vim-fugitive](https://github.com/tpope/vim-fugitive), simply add `Bundle
+'tpope/vim-fugitive'` to your `.vimrc` and run `:BundleInstall`.
 
 To check for updates on all installed plugins, run `:BundleUpdate`.
 
@@ -184,8 +185,7 @@ default shortcut: <kbd>Leader</kbd>+<kbd>c</kbd>+<kbd>Space</kbd>.  (The default
 
 ### Indent Settings Auto-Detection
 
-We all have our preferred idea of how far to indent and when to use tabs and
-when to use spaces, but when editing a file someone else created, the important
+We all have our preferred idea of how far to indent and when to use tabs vs spaces, but when editing a file created by someone else, the important
 thing is *to stay consistent with their indent settings*.  The [sleuth.vim
 plug-in](https://github.com/tpope/vim-sleuth) inspects newly opened files and
 sets the relevant settings (`shiftwidth` and `expandtab`) automatically.
