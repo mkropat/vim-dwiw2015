@@ -58,7 +58,7 @@ And then run:
 ## Default Settings
 
 The authoritative source for the provided default settings is the
-(well-documented) [source file itself](plug-in/dwiw2015.vim).
+(well-documented) [source file itself](plugin/dwiw2015.vim).
 
 ### New Key Shortcuts
 
