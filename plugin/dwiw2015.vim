@@ -33,7 +33,7 @@ endif
 
 " C-/ -- Terminal: toggle whether line is commented  [Normal / Visual Mode]
 "   (Only works in terminals where <C-/> is equivalent to <C-_>)
-noremap <silent> <C-_> :call NERDComment(0,"toggle")<CR>
+noremap <C-_> <Plug>NERDCommenterToggle
 
 " Enter key -- insert a blank line above the current          [Normal Mode]
 if maparg('<CR>', 'n') ==# ''
