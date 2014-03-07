@@ -26,7 +26,7 @@ of the boilerplate code from your `.vimrc`, you might be in the right place.
 
 One command will get you going:
 
-    \curl -sS https://raw.github.com/mkropat/vim-dwiw2015/master/bootstrap.sh | sh
+    curl -sS https://raw.github.com/mkropat/vim-dwiw2015/master/bootstrap.sh | sh
 
 It should be safe to run — even on an existing Vim set up. Outside of the
 Vundle plug-ins installed into `~/.vim/bundle/`, only three files are affected:
