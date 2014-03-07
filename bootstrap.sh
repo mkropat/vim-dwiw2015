@@ -97,7 +97,8 @@ ensure_vimrc_hook_exists() {
 
 install_bundles() {
     msg "Calling Vundle's :BundleInstall!"
-    vim +BundleInstall! +qall
+    vim +BundleInstall! +qall - ||
+        die "Error: unable to start vim"
 }
 
 msg() {
