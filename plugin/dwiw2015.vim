@@ -24,6 +24,9 @@ if has("gui_running") == 0
     unmap <C-V>
 endif
 
+" C-Y -- scroll window upwards                       [Normal / Visual Mode]
+unmap <C-Y>
+
 " C-Z -- Gvim: undo                                             [All Modes]
 "    Terminal: suspend vim and return to shell       [Normal / Visual Mode]
 if has("gui_running") == 0

@@ -72,7 +72,6 @@ Shortcut           | Description
 -------------------|-------------------------------
 <kbd>Ctrl-A</kbd>  | select all
 <kbd>Ctrl-S</kbd>  | save
-<kbd>Ctrl-Y</kbd>  | redo
 <kbd>Ctrl-Z</kbd>  | undo (GUI only)
 
 #### Normal / Visual Mode
