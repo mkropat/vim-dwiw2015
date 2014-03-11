@@ -38,6 +38,13 @@ endif
 "   (Only works in terminals where <C-/> is equivalent to <C-_>)
 noremap <C-_> <Plug>NERDCommenterToggle
 
+" & -- repeate last `:s` substitute (preserves flags)
+nnoremap & :&&<CR>
+xnoremap & :&&<CR>
+
+" Y -- yank to end of line; see `:help Y`                     [Normal Mode]
+nnoremap Y y$
+
 " Enter key -- insert a blank line above the current          [Normal Mode]
 if maparg('<CR>', 'n') ==# ''
     nnoremap <CR> O<Esc>j

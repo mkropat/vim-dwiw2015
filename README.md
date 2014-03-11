@@ -90,6 +90,8 @@ Shortcut           | Description
 
 Shortcut           | Description
 -------------------|-------------------------------
+<kbd>&amp;</kbd>   | repeat last `:s` substitue (preserves flags)
+<kbd>Y</kbd>       | yank to end of line (to be consistent with <kbd>C</kbd> and <kbd>D</kbd>)
 <kbd>Enter</kbd>   | insert blank line above current
 <kbd>Ctrl-L</kbd>  | clear search term highlighting
 
