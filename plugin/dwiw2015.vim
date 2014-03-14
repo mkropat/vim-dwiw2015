@@ -1,14 +1,17 @@
 " dwiw2015.vim -- sensible defaults for a modern text editor
 
-"   Maintainer: Michael Kropat <mail@michael.kropat.name>
+" Maintainer: Michael Kropat <mail@michael.kropat.name>
 
-" Run-once guard; keeps autocmds from registering more than once
+" Run-once guard
 if exists('g:loaded_dwiw2015') || &compatible
     finish
 else
     let g:loaded_dwiw2015 = 1
 endif
 
+" Group script autocmds so they can be identified with `:autocmd dwiw`
+augroup dwiw
+autocmd!
 
 " ###### Key Bindings ######
 
@@ -45,11 +48,13 @@ xnoremap & :&&<CR>
 " Y -- yank to end of line; see `:help Y`                     [Normal Mode]
 nnoremap Y y$
 
-" Enter key -- insert a blank line above the current          [Normal Mode]
+" Enter key -- insert a new line above the current            [Normal Mode]
 if maparg('<CR>', 'n') ==# ''
     nnoremap <CR> O<Esc>j
     " ...but not in the Command-line window (solution by Ingo Karkat [2])
     autocmd CmdwinEnter * nnoremap <buffer> <CR> <CR>
+    " ...nor in the Quickfix window
+    autocmd BufReadPost * if &buftype ==# 'quickfix' | nnoremap <buffer> <CR> <CR> | endif
 endif
 
 " j -- move down one line on the screen              [Normal / Visual Mode]
@@ -189,6 +194,7 @@ set wildmode=list:longest
 " * viminfo
 " * wildmenu
 
+augroup END
 
 " ##### References #####
 "
