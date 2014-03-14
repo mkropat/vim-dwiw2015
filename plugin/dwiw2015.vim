@@ -148,10 +148,12 @@ if !isdirectory(expand(&directory))
 endif
 
 " undofile -- keep a file to persist undo history after file is closed
-set undofile
-set undodir=~/.vim/tmp/undo//
-if !isdirectory(expand(&undodir))
-    call mkdir(expand(&undodir), "p")
+if has("persistent_undo") == 1
+    set undofile
+    set undodir=~/.vim/tmp/undo//
+    if !isdirectory(expand(&undodir))
+        call mkdir(expand(&undodir), "p")
+    endif
 endif
 
 " wildmode  -- behavior of command-line tab completion
