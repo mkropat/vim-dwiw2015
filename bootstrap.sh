@@ -20,7 +20,7 @@ main() {
     ensure_bundles_file_populated   &&
     ensure_vimrc_hook_exists        &&
 
-    install_bundles                 &&
+    install_or_update_bundles       &&
 
     msg 'Bootstrap successful! Run `vim` or `gvim` to get started'
 }
@@ -98,9 +98,9 @@ ensure_vimrc_hook_exists() {
     fi
 }
 
-install_bundles() {
+install_or_update_bundles() {
     msg "Calling Vundle's :BundleInstall!"
-    vim +BundleInstall! +qall - ||
+    vim -u "$loader_file_path" +BundleInstall! +qall - ||
         die "Error: unable to start vim"
 }
 
