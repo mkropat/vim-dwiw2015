@@ -73,6 +73,12 @@ vnoremap k gk
 nnoremap gk k
 vnoremap gk k
 
+" > -- shift selection rightwards (preserve selection)        [Visual Mode]
+vnoremap > >gv
+
+" < -- shift selection leftwards (preserve selection)         [Visual Mode]
+vnoremap < <gv
+
 " Tab -- indent at beginning of line, otherwise autocomplete  [Insert Mode]
 if maparg('<Tab>', 'i') ==# ''
     inoremap <silent> <Tab> <C-R>=DwiwITab()<cr>
