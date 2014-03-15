@@ -1,11 +1,14 @@
 #!/bin/sh
 
-       myvim_path=~/.vim
      myvimrc_path=~/.vimrc
- loader_file_path="$myvim_path/dwiw-loader.vim"
-bundles_file_path="$myvim_path/bundles.vim"
-      bundle_path="$myvim_path/bundle"
-      vundle_path="$bundle_path/vundle"
+  myvimfiles_path=~/.vim
+  myvimfiles_tlde="~/.vim"
+ loader_file_path="$myvimfiles_path/dwiw-loader.vim"
+ loader_file_tlde="$myvimfiles_tlde/dwiw-loader.vim"
+bundles_file_path="$myvimfiles_path/bundles.vim"
+bundles_file_tlde="$myvimfiles_tlde/bundles.vim"
+      vundle_path="$myvimfiles_path/bundle/vundle"
+      vundle_tlde="$myvimfiles_tlde/bundle/vundle"
 
 quiet=--quiet
 
@@ -57,9 +60,9 @@ write_loader_script_to() {
 \" Version: 1.0
 set nocompatible
 filetype off
-set rtp+=$vundle_path/
+set rtp+=$vundle_tlde/
 call vundle#rc()
-source $bundles_file_path
+source $bundles_file_tlde
 filetype plugin indent on"
     echo "$script" >|"$1"
 }
@@ -88,9 +91,9 @@ ensure_bundle_line() {
 }
 
 ensure_vimrc_hook_exists() {
-    if ! grep -qe "^source $loader_file_path" "$myvimrc_path"; then
+    if ! grep -qe "^source $loader_file_tlde" "$myvimrc_path"; then
         msg "Adding hook to .vimrc"
-        prepend_line "source $loader_file_path" "$myvimrc_path" ||
+        prepend_line "source $loader_file_tlde" "$myvimrc_path" ||
             die "Error: unable to add loader hook to $myvimrc_path"
     fi
 }
