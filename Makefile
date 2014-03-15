@@ -1,5 +1,5 @@
 .PHONY: test
 test:
-	shellcheck bootstrap.sh
+	shellcheck --exclude SC2088 bootstrap.sh
 	checkbashisms bootstrap.sh
 

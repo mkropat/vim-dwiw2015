@@ -13,14 +13,14 @@ bundles_file_tlde="$myvimfiles_tlde/bundles.vim"
 quiet=--quiet
 
 main() {
-    parse_options "$@" &&
+    parse_options "$@"              &&
 
-    ensure_vundle_installed &&
-    ensure_loader_file_exists &&
-    ensure_bundles_file_populated &&
-    ensure_vimrc_hook_exists &&
+    ensure_vundle_installed         &&
+    ensure_loader_file_exists       &&
+    ensure_bundles_file_populated   &&
+    ensure_vimrc_hook_exists        &&
 
-    install_bundles &&
+    install_bundles                 &&
 
     msg 'Bootstrap successful! Run `vim` or `gvim` to get started'
 }
@@ -64,7 +64,7 @@ set rtp+=$vundle_tlde/
 call vundle#rc()
 source $bundles_file_tlde
 filetype plugin indent on"
-    echo "$script" >|"$1"
+    printf '%s\n' "$script" >|"$1"
 }
 
 ensure_bundles_file_populated() {
@@ -116,7 +116,7 @@ die() {
 prepend_line() {
     local tempfile=$(make_tempfile)
     touch "$2"
-    echo "$1" | cat - "$2" >"$tempfile" && mv "$tempfile" "$2"
+    printf '%s\n' "$1" | cat - "$2" >"$tempfile" && mv "$tempfile" "$2"
 }
 
 make_tempfile() {
