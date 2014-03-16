@@ -92,7 +92,31 @@ function EnsureAdded-VimrcHook {
 
 function InstallOrUpdate-Bundles {
     Write-Output "Calling Vundle's :BundleInstall!"
-    Start-Process gvim -ArgumentList -u,$loader_file_path,+BundleInstall,+qall
+    try {
+        # Try to find gvim.exe in $env:Path or in App Paths
+        Start-Process gvim -ArgumentList -u,$loader_file_path,+BundleInstall!,+qall
+    } catch {
+        try {
+            # Failing that, try to locate it manually
+            Start-Process (Get-GvimExePath) -ArgumentList -u,$loader_file_path,+BundleInstall!,+qall
+        } catch {
+            throw "Unable to locate gvim.exe"
+        }
+    }
+}
+
+function Get-GvimExePath {
+    # Find Vim directory from the *Cream* Vim Installer's UninstallString
+    $is64bit = [IntPtr]::size -eq 8
+    if ($is64bit) {
+        $hklmSoftwareWindows = 'HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion'
+    } else {
+        $hklmSoftwareWindows = 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion'
+    }
+    $uninstallVim = Join-Path $hklmSoftwareWindows 'Uninstall\Vim'
+    $uninstallString = (Get-ItemProperty $uninstallVim UninstallString).UninstallString
+    $installDir = Split-Path -Parent $uninstallString
+    return Join-Path $installDir 'gvim.exe'
 }
 
 main

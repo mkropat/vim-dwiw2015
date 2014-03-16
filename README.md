@@ -9,6 +9,7 @@ expect from a modern text editor.
 
 Benefits at a glance:
 
+* One-step install for Windows, Linux, and OS X
 * No cruft in your `.vimrc`, since default settings are cleanly segregated into a plug-in
 * Modern plug-in management with [Vundle](https://github.com/gmarik/Vundle.vim)
 * Includes a **small**, [curated set of plug-ins](#modern-features) to provide modern text editor functionality
@@ -40,9 +41,10 @@ installation and checks for updates on any plug-ins already installed.
 
 ### Windows
 
-Windows users can use the [Plug-in Only](#plug-in-only) install for now. *I'm
-considering creating a bootstrap option for Windows. Perhaps as a [Chocolatey
-package](https://chocolatey.org/)?*
+Assuming you have [Chocolatey](http://chocolatey.org/) installed, open a
+command prompt and run:
+
+    cinst vim-dwiw2015
 
 ### Plug-in Only
 
@@ -52,9 +54,9 @@ include just the **dwiw2015.vim** plug-in by adding the following line to your
 
     Bundle 'mkropat/vim-dwiw2015'
 
-And then run:
+And then run the following inside Vim:
 
-    vim +BundleInstall +qall
+    :BundleInstall
 
 ## Default Settings
 
