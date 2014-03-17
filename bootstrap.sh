@@ -14,6 +14,7 @@ quiet=--quiet
 
 main() {
     parse_options "$@"              &&
+    check_for_prerequisites         &&
 
     ensure_vundle_installed         &&
     ensure_loader_file_exists       &&
@@ -35,6 +36,18 @@ parse_options() {
     done
 
     shift $(( OPTIND - 1 ))
+}
+
+check_for_prerequisites() {
+    local missing=''
+    for command in git vim; do
+        if ! hash "$command" 2>/dev/null; then
+            missing="$missing $command"
+        fi
+    done
+    if [ -n "$missing" ]; then
+        die "Error: missing dependencies:$missing"
+    fi
 }
 
 ensure_vundle_installed() {
