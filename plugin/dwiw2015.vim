@@ -57,6 +57,12 @@ if maparg('<CR>', 'n') ==# ''
     autocmd BufReadPost * if &buftype ==# 'quickfix' | nnoremap <buffer> <CR> <CR> | endif
 endif
 
+" Tab - switch to next tab                                    [Normal Mode]
+nnoremap <Tab> :tabnext<CR>
+
+" Shift-Tab - switch to previous tab                          [Normal Mode]
+nnoremap <S-Tab> :tabprev<CR>
+
 " j -- move down one line on the screen              [Normal / Visual Mode]
 nnoremap j gj
 vnoremap j gj
