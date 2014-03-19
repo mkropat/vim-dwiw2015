@@ -112,6 +112,8 @@ Shortcut             | Description
 ---------------------|-------------------------------
 <kbd>Tab</kbd>       | indent at beginning of line, otherwise autocomplete
 <kbd>Shift-Tab</kbd> | select previous autocompletion
+<kbd>Ctrl-Q</kbd>    | insert literal character
+<kbd>Ctrl-V</kbd>    | paste from clipboard (GUI only)
 
 ### Overriding the Defaults
 

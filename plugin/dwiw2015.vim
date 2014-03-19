@@ -21,10 +21,14 @@ if has("gui_macvim") == 0
     source $VIMRUNTIME/mswin.vim
 endif
 
-" C-V -- Gvim: paste (use Ctrl-Q to enter Visual Block mode)    [All Modes]
+" C-V -- Gvim: paste                                            [All Modes]
 "    Terminal: enter Visual Block mode               [Normal / Visual Mode]
+"    Terminal: insert literal character                       [Insert Mode]
+" C-Q -- Gvim: enter Visual Block mode               [Normal / Visual Mode]
+"        Gvim: insert literal character                       [Insert Mode]
 if has("gui_running") == 0
     unmap <C-V>
+    iunmap <C-V>
 endif
 
 " C-Y -- scroll window upwards                       [Normal / Visual Mode]
