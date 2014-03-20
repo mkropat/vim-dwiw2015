@@ -177,6 +177,10 @@ if has("persistent_undo") == 1
     endif
 endif
 
+" visualbell -- instead of audible bell, output terminal code 't_vb'
+"   Disable annoying bell by setting 't_vb' to ''
+set visualbell t_vb=
+
 " wildmode  -- behavior of command-line tab completion
 " = list    -- print possible matches
 " = longest -- complete until amibguous (same as bash/readline)

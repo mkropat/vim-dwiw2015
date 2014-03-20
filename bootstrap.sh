@@ -104,7 +104,7 @@ ensure_bundle_line() {
 }
 
 ensure_vimrc_hook_exists() {
-    if ! grep -qe "^source $loader_file_tlde" "$myvimrc_path"; then
+    if ! grep -qe "^source $loader_file_tlde" "$myvimrc_path" 2>/dev/null; then
         msg "Adding hook to .vimrc"
         prepend_line "source $loader_file_tlde" "$myvimrc_path" ||
             die "Error: unable to add loader hook to $myvimrc_path"
