@@ -180,6 +180,8 @@ endif
 " visualbell -- instead of audible bell, output terminal code 't_vb'
 "   Disable annoying bell by setting 't_vb' to ''
 set visualbell t_vb=
+" When GUI starts, 't_vb' is reset, so set it again to ''
+autocmd GUIEnter * set t_vb=
 
 " wildmode  -- behavior of command-line tab completion
 " = list    -- print possible matches
