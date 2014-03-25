@@ -1,4 +1,12 @@
 #!/bin/sh
+# bootstrap.sh -- install the dwiw2015 Vim distribution
+
+# See the Github page (https://github.com/mkropat/vim-dwiw2015) for details
+
+# It should be safe to run -- even on an existing Vim set up.  Re-running the
+# `bootstrap.sh` script is safe — it simply resumes the installation and checks
+# for updates on any plug-ins already installed.
+
 
      myvimrc_path=~/.vimrc
   myvimfiles_path=~/.vim
@@ -17,8 +25,16 @@ main() {
     check_for_prerequisites         &&
 
     ensure_vundle_installed         &&
+
+    # Create `~/.vim/dwiw-loader.vim` script to load Vundle and then call
+    # `bundles.vim`. Do not modify the loader file.
     ensure_loader_file_exists       &&
+
+    # Create `~/.vim/bundles.vim` script, which contains a list of Vundle
+    # plug-ins. Feel free to make local modifications to this file.
     ensure_bundles_file_populated   &&
+
+    # Prepand a one-line hook in `~/.vimrc` to call `dwiw-loader.vim`.
     ensure_vimrc_hook_exists        &&
 
     install_or_update_bundles       &&

@@ -29,15 +29,8 @@ One command will get you going:
 
     curl -sS https://raw.github.com/mkropat/vim-dwiw2015/master/bootstrap.sh | sh
 
-It should be safe to run — even on an existing Vim set up. Outside of the
-Vundle plug-ins installed into `~/.vim/bundle/`, only three files are affected:
-
-* `~/.vimrc` — a one line hook is added to call `dwiw-loader.vim`
-* `~/.vim/dwiw-loader.vim` (do not modify) — script to load Vundle and then call `bundles.vim`
-* `~/.vim/bundles.vim` (safe to add local modifications) — a list of Vundle plug-ins
-
-Re-running the `bootstrap.sh` script is safe — it simply resumes the
-installation and checks for updates on any plug-ins already installed.
+It should be safe to run — even on an existing Vim set up. See the [bootstrap
+script source](bootstrap.sh) for details.
 
 ### Windows
 
@@ -45,6 +38,14 @@ Assuming you have [Chocolatey](http://chocolatey.org/) installed, open a
 command prompt and run:
 
     cinst vim-dwiw2015
+
+It should be safe to run — even on an existing Vim set up. See the [bootstrap
+script source](bootstrap.ps1) for details.
+
+Alternatively, you can download the [bootstrap script](bootstrap.ps1) and run
+it manually from the PowerShell console:
+
+    & .\bootstrap.ps1
 
 ### Plug-in Only
 

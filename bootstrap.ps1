@@ -1,3 +1,11 @@
+# bootstrap.ps1 -- install the dwiw2015 Vim distribution
+
+# See the Github page (https://github.com/mkropat/vim-dwiw2015) for details
+
+# It should be safe to run -- even on an existing Vim set up.  Re-running the
+# `bootstrap.ps1` script is safe — it simply resumes the installation and
+# checks for updates on any plug-ins already installed.
+
 $myvimrc_path      = Join-Path $env:UserProfile _vimrc
 $myvimfiles_path   = Join-Path $env:UserProfile vimfiles
 $myvimfiles_tlde   = '~/vimfiles'
@@ -12,9 +20,19 @@ $vundle_tlde       = "$bundle_tlde/vundle"
 
 function main {
     EnsureInstalled-Vundle
+
+    # Create `$env:UserProfile\vim\dwiw-loader.vim` script to load Vundle and
+    # then call `bundles.vim`. Do not modify the loader file.
     EnsureCreated-LoaderFile
+
+    # Create `$env:UserProfile\vim\bundles.vim` script, which contains a list
+    # of Vundle plug-ins. Feel free to make local modifications to this file.
     EnsurePopulated-BundlesFile
+
+    # Prepand a one-line hook in `$env:UserProfile/_vimrc` to call
+    # `dwiw-loader.vim`.
     EnsureAdded-VimrcHook
+
     InstallOrUpdate-Bundles
 }
 
