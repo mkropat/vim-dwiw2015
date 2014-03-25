@@ -92,9 +92,10 @@ function EnsurePopulated-BundlesFile {
         'tpope/vim-sensible',
         'mkropat/vim-dwiw2015',
         'bling/vim-airline',
-        'tpope/vim-sleuth',
+        'kien/ctrlp.vim',
+        'rking/ag.vim',
         'scrooloose/nerdcommenter',
-        'kien/ctrlp.vim'
+        'tpope/vim-sleuth'
     $lines_to_add = $bundles | %{ "Bundle '$_'" }
     $lines = $old_lines + $lines_to_add | Select-Object -Unique
     [System.IO.File]::WriteAllLines($bundles_file_path, $lines) # Vim chokes on BOM outputted by Out-File

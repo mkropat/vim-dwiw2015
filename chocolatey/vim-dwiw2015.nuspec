@@ -13,6 +13,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <iconUrl>https://raw.github.com/mkropat/vim-dwiw2015/master/chocolatey/vimlogo.gif</iconUrl>
     <dependencies>
+      <dependency id="ag" version="0.18.1" />
       <dependency id="git" version="1.8" />
       <dependency id="vim" version="7.4" />
     </dependencies>

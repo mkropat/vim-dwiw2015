@@ -150,18 +150,14 @@ Vim already offers the `:grep` command for this, but `grep` is less than ideal
 for searching text files in large directory structures because `grep` returns
 results from irrelevant files (compiled files, version control internals etc.).
 
-A better alternative is [ack](http://beyondgrep.com/).  Using the [ack.vim
-plug-in](http://www.vim.org/scripts/script.php?script_id=2572), you can search
-with `ack` straight from Vim by entering `:Ack <search terms>`.
+A better alternative is [The Silver
+Searcher](http://geoff.greer.fm/2011/12/27/the-silver-searcher-better-than-ack/)
+a.k.a. `ag`.  Using the [ag.vim plug-in](https://github.com/rking/ag.vim), you
+can search straight from Vim with the command `:Ag <search terms>`.
 
-Before the `ack.vim` can be used, the `ack` program must be installed.
-Fortunately, packages exist for all the major platforms (called either `ack` or
-`ack-grep`).
-
-In the near future, this will probably be replaced with
-[ag.vim](https://github.com/rking/ag.vim), now that [The Silver
-Searcher](https://github.com/ggreer/the_silver_searcher) is becoming widely
-available.
+Note: before `ag.vim` can be used, the The Silver Searcher must be installed.
+Fortunately, packages exist for all the major platforms (called perhaps
+`silversearcher-ag` or `the_silver_searcher`).
 
 ### Informative Statusline
 
