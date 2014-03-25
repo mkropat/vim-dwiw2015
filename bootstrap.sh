@@ -140,7 +140,7 @@ ensure_vimrc_hook_exists() {
 
 install_or_update_bundles() {
     msg "Calling Vundle's :BundleInstall!"
-    vim -u "$loader_file_path" +BundleInstall! +qall - ||
+    echo | vim -u "$loader_file_path" +BundleInstall! +qall - ||
         die "Error: unable to start vim"
 }
 
