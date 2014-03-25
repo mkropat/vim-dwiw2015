@@ -38,23 +38,28 @@ function EnsureInstalled-Vundle {
     }
 }
 
+$loader_version = '1.1'
 $dwiw_loader_script = @"
-" loader.vim - Load Vundle and tell it about bundles
-" Version: 1.0
+" dwiw-loader.vim - Load Vundle and tell it about bundles
+" Version: $loader_version
 set nocompatible
 filetype off
 set rtp+=$vundle_tlde/
 call vundle#rc("$bundle_tlde")
 source $bundles_file_tlde
 filetype plugin indent on
+runtime! plugin/sensible.vim
+runtime! plugin/dwiw2015.vim
 "@
 
 function EnsureCreated-LoaderFile {
-    if (Test-Path -LiteralPath $loader_file_path) {
-        return
+    if (! (Test-Path -LiteralPath $loader_file_path)) {
+        Write-Output "Creating loader script at $loader_file_path"
+        $dwiw_loader_script | Out-File -Encoding ascii $loader_file_path
+    } elseif ((Get-ScriptVersion $loader_file_path) -ne '1.1') {
+        Write-Output "Updating loader script at $loader_file_path to version $loader_version"
+        $dwiw_loader_script | Out-File -Encoding ascii $loader_file_path
     }
-    Write-Output "Creating loader script at $loader_file_path"
-    $dwiw_loader_script | Out-File -Encoding ascii $loader_file_path
 }
 
 function EnsurePopulated-BundlesFile {
@@ -117,6 +122,15 @@ function Get-GvimExePath {
     $uninstallString = (Get-ItemProperty $uninstallVim UninstallString).UninstallString
     $installDir = Split-Path -Parent $uninstallString
     return Join-Path $installDir 'gvim.exe'
+}
+
+function Get-ScriptVersion($script_path) {
+    return Get-Content $script_path -ErrorAction SilentlyContinue |
+        Select-String '^" Version: (.*)' |
+        select -First 1 -ExpandProperty Matches |
+        select -ExpandProperty Groups |
+        select -Index 1 |
+        select -ExpandProperty Value
 }
 
 main

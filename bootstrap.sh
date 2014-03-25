@@ -61,22 +61,33 @@ ensure_vundle_installed() {
 }
 
 ensure_loader_file_exists() {
+    local loader_version="1.1"
     if [ ! -e "$loader_file_path" ]; then
-        msg "Creating loader script at $loader_file_path"
-        write_loader_script_to "$loader_file_path" ||
+        msg "Creating loader script at '$loader_file_path'"
+        write_loader_script_to "$loader_file_path" "$loader_version" ||
+            die "Error: unable to create loader script at $loader_file_path"
+    elif [ "$(get_script_version "$loader_file_path")" != "$loader_version" ]; then
+        msg "Upgrading loader script at '$loader_file_path' to latest version"
+        write_loader_script_to "$loader_file_path" "$loader_version" ||
             die "Error: unable to create loader script at $loader_file_path"
     fi
 }
 
+get_script_version() {
+    perl -ne '/^" Version: (.*)/ && do { print "$1\n"; exit }' "$1" 2>/dev/null
+}
+
 write_loader_script_to() {
-    local script="\" loader.vim - Load Vundle and tell it about bundles
-\" Version: 1.0
+    local script="\" dwiw-loader.vim - Load Vundle and tell it about bundles
+\" Version: $2
 set nocompatible
 filetype off
 set rtp+=$vundle_tlde/
 call vundle#rc()
 source $bundles_file_tlde
-filetype plugin indent on"
+filetype plugin indent on
+runtime! plugin/sensible.vim
+runtime! plugin/dwiw2015.vim"
     printf '%s\n' "$script" >|"$1"
 }
 

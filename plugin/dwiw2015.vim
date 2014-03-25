@@ -53,13 +53,11 @@ xnoremap & :&&<CR>
 nnoremap Y y$
 
 " Enter key -- insert a new line above the current            [Normal Mode]
-if maparg('<CR>', 'n') ==# ''
-    nnoremap <CR> O<Esc>j
-    " ...but not in the Command-line window (solution by Ingo Karkat [2])
-    autocmd CmdwinEnter * nnoremap <buffer> <CR> <CR>
-    " ...nor in the Quickfix window
-    autocmd BufReadPost * if &buftype ==# 'quickfix' | nnoremap <buffer> <CR> <CR> | endif
-endif
+nnoremap <CR> O<Esc>j
+" ...but not in the Command-line window (solution by Ingo Karkat [2])
+autocmd CmdwinEnter * nnoremap <buffer> <CR> <CR>
+" ...nor in the Quickfix window
+autocmd BufReadPost * if &buftype ==# 'quickfix' | nnoremap <buffer> <CR> <CR> | endif
 
 " Tab - switch to next tab                                    [Normal Mode]
 nnoremap <Tab> :tabnext<CR>
@@ -90,10 +88,8 @@ vnoremap > >gv
 vnoremap < <gv
 
 " Tab -- indent at beginning of line, otherwise autocomplete  [Insert Mode]
-if maparg('<Tab>', 'i') ==# ''
-    inoremap <silent> <Tab> <C-R>=DwiwITab()<cr>
-    inoremap <silent> <S-Tab> <C-N>
-endif
+inoremap <silent> <Tab> <C-R>=DwiwITab()<cr>
+inoremap <silent> <S-Tab> <C-N>
 
 " Taken from Gary Bernhardt's vimrc [1]
 function! DwiwITab()

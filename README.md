@@ -117,16 +117,10 @@ Shortcut             | Description
 
 ### Overriding the Defaults
 
-Care has been taken to include only default settings that are likely to appeal
-to a wide number of users. It's inevitable toes will be stepped on though.
-
-Because **dwiw2015.vim** loads as a plug-in, that means — by default — it
-loads *after* your `.vimrc`, which makes anything it sets override the previous
-setting.  The way to get around this is to add a line to your `.vimrc` that
-forces **dwiw2015.vim** to load before you set your settings:
-
-    runtime! plugin/dwiw2015.vim
-    " <your settings here>
+Add your custom settings to `.vimrc` **after** the hook line `source …
+dwiw-loader.vim`. The `dwiw-loader.vim` script pre-loads both the
+`dwiw2015.vim` and `sensible.vim` plugins, allowing you to set custom overrides
+in your `.vimrc`.
 
 ## Modern Features
 
