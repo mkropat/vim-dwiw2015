@@ -7,22 +7,10 @@
 # `bootstrap.sh` script is safe — it simply resumes the installation and checks
 # for updates on any plug-ins already installed.
 
-
-     myvimrc_path=~/.vimrc
-  myvimfiles_path=~/.vim
-  myvimfiles_tlde="~/.vim"
- loader_file_path="$myvimfiles_path/dwiw-loader.vim"
- loader_file_tlde="$myvimfiles_tlde/dwiw-loader.vim"
-bundles_file_path="$myvimfiles_path/bundles.vim"
-bundles_file_tlde="$myvimfiles_tlde/bundles.vim"
-      vundle_path="$myvimfiles_path/bundle/vundle"
-      vundle_tlde="$myvimfiles_tlde/bundle/vundle"
-
-quiet=--quiet
-
 main() {
     parse_options "$@"              &&
     check_for_prerequisites         &&
+    locate_paths                    &&
 
     ensure_vundle_installed         &&
 
@@ -43,6 +31,8 @@ main() {
 }
 
 parse_options() {
+    quiet=--quiet
+
     while getopts v opt; do
         case "$opt" in
             v)  # be verbose
@@ -64,6 +54,23 @@ check_for_prerequisites() {
     if [ -n "$missing" ]; then
         die "Error: missing dependencies:$missing"
     fi
+}
+
+locate_paths() {
+    myvimrc_path=$(resolve_symlinks ~/.vimrc)
+
+    local myvimfiles_path myvimfiles_tlde
+    myvimfiles_path=~/.vim
+    myvimfiles_tlde="~/.vim"
+
+    loader_file_path=$(resolve_symlinks "$myvimfiles_path/dwiw-loader.vim")
+    loader_file_tlde="$myvimfiles_tlde/dwiw-loader.vim"
+
+    bundles_file_path=$(resolve_symlinks "$myvimfiles_path/bundles.vim")
+    bundles_file_tlde="$myvimfiles_tlde/bundles.vim"
+
+    vundle_path=$(resolve_symlinks "$myvimfiles_path/bundle/vundle")
+    vundle_tlde="$myvimfiles_tlde/bundle/vundle"
 }
 
 ensure_vundle_installed() {
@@ -151,6 +158,51 @@ msg() {
 die() {
     printf '%s\n' "$*"
     exit 1
+}
+
+resolve_symlinks() {
+    _resolve_symlinks "$1"
+}
+
+_resolve_symlinks() {
+    _assert_no_path_cycles "$@" || return
+
+    local dir_context path
+    path=$(readlink -- "$1")
+    if [ $? -eq 0 ]; then
+        dir_context=$(dirname -- "$1")
+        _resolve_symlinks "$(_prepend_dir_context_if_necessary "$dir_context" "$path")" "$@"
+    else
+        printf '%s\n' "$1"
+    fi
+}
+
+_prepend_dir_context_if_necessary() {
+    if [ "$1" = . ]; then
+        printf '%s\n' "$2"
+    else
+        _prepend_path_if_relative "$1" "$2"
+    fi
+}
+
+_prepend_path_if_relative() {
+    case "$2" in
+        /* ) printf '%s\n' "$2" ;;
+         * ) printf '%s\n' "$1/$2" ;;
+    esac
+}
+
+_assert_no_path_cycles() {
+    local target path
+
+    target=$1
+    shift
+
+    for path in "$@"; do
+        if [ "$path" = "$target" ]; then
+            return 1
+        fi
+    done
 }
 
 prepend_line() {
