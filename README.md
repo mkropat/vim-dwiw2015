@@ -79,15 +79,17 @@ Shortcut           | Description
 
 #### Normal / Visual Mode
 
-Shortcut           | Description
--------------------|-------------------------------
-<kbd>Ctrl-Q</kbd>  | enter Visual Block mode
-<kbd>Ctrl-V</kbd>  | paste from clipboard (GUI only)
-<kbd>Ctrl-/</kbd>  | toggles commenting of selected line(s) (Terminal only; not all terminals supported)
-<kbd>j</kbd>       | move down one line on the screen
-<kbd>gj</kbd>      | move down one line in the file
-<kbd>k</kbd>       | move up one line on the screen
-<kbd>gk</kbd>      | move up one line in the file
+Shortcut               | Description
+-----------------------|-------------------------------
+<kbd>Ctrl-Q</kbd>      | enter Visual Block mode
+<kbd>Ctrl-V</kbd>      | paste from clipboard (GUI only)
+<kbd>Ctrl-/</kbd>      | toggles commenting of selected line(s) (Terminal only; not all terminals supported)
+<kbd>Q</kbd>`{motion}` | format specified lines (like `gq`)
+<kbd>gQ</kbd>          | enter Ex mode (since `Q` is re-mapped)
+<kbd>j</kbd>           | move down one line on the screen
+<kbd>gj</kbd>          | move down one line in the file
+<kbd>k</kbd>           | move up one line on the screen
+<kbd>gk</kbd>          | move up one line in the file
 
 #### Normal Mode Only
 

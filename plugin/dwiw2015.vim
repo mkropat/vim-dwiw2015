@@ -182,6 +182,9 @@ nnoremap <silent> <C-Tab> :tabnext<CR>
 " Ctrl-Shift-Tab -- Gvim: switch to previous tab              [Normal Mode]
 nnoremap <silent> <C-S-Tab> :tabprev<CR>
 
+" Q{motion} -- format specified lines                [Normal / Visual Mode]
+noremap Q gq
+
 " j -- move down one line on the screen              [Normal / Visual Mode]
 nnoremap j gj
 vnoremap j gj
