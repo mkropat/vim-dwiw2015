@@ -42,6 +42,11 @@ set lazyredraw
 " linebreak -- wrap long lines at word breaks instead of fixed length
 set linebreak
 
+" listchars -- characters for rendering tab character etc. with :list
+if !has('win32') && (&termencoding ==# 'utf-8' || &encoding ==# 'utf-8')
+  let &listchars = "tab:\u21e5 ,trail:\u2423,extends:\u21c9,precedes:\u21c7,nbsp:\u00b7"
+endif
+
 " modeline -- whether to run lines like '# vim: noai:ts=4:sw=4' in any file
 "   Disabled, as it tends to be a source of security vulnerabilities
 "   Look at the 'securemodelines' plugin for a better alternative

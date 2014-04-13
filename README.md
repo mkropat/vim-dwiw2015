@@ -123,6 +123,18 @@ dwiw-loader.vim`. The `dwiw-loader.vim` script pre-loads both the
 `dwiw2015.vim` and `sensible.vim` plugins, allowing you to set custom overrides
 in your `.vimrc`.
 
+### Troubleshooting
+
+#### Slow Scrolling
+
+If you experience slow scrolling in `:list` mode in a file with long lines, the
+issue may be a result of [the font in use misisng certain
+characters](https://code.google.com/p/vim/issues/detail?id=210).  As a
+workaround, you can set the following in your `.vimrc` to display ascii
+characters (which are present in any font):
+
+    set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
+
 ## Modern Features
 
 ### Plug-in Management
