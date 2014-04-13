@@ -59,11 +59,11 @@ autocmd CmdwinEnter * nnoremap <buffer> <CR> <CR>
 " ...nor in the Quickfix window
 autocmd BufReadPost * if &buftype ==# 'quickfix' | nnoremap <buffer> <CR> <CR> | endif
 
-" Tab - switch to next tab                                    [Normal Mode]
-nnoremap <Tab> :tabnext<CR>
+" Ctrl-Tab -- Gvim: switch to next tab                        [Normal Mode]
+nnoremap <C-Tab> :tabnext<CR>
 
-" Shift-Tab - switch to previous tab                          [Normal Mode]
-nnoremap <S-Tab> :tabprev<CR>
+" Ctrl-Shift-Tab -- Gvim: switch to previous tab              [Normal Mode]
+nnoremap <C-S-Tab> :tabprev<CR>
 
 " j -- move down one line on the screen              [Normal / Visual Mode]
 nnoremap j gj
