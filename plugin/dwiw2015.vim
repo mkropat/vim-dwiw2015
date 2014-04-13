@@ -13,94 +13,6 @@ endif
 augroup dwiw
 autocmd!
 
-" ###### Key Bindings ######
-
-" Load Windows keybindings on all platforms except OS-X GUI
-"   Maps the usual suspects: Ctrl-{A,C,S,V,X,Y,Z}
-if has("gui_macvim") == 0
-    source $VIMRUNTIME/mswin.vim
-endif
-
-" C-V -- Gvim: paste                                            [All Modes]
-"    Terminal: enter Visual Block mode               [Normal / Visual Mode]
-"    Terminal: insert literal character                       [Insert Mode]
-" C-Q -- Gvim: enter Visual Block mode               [Normal / Visual Mode]
-"        Gvim: insert literal character                       [Insert Mode]
-if has("gui_running") == 0
-    unmap <C-V>
-    iunmap <C-V>
-endif
-
-" C-Y -- scroll window upwards                       [Normal / Visual Mode]
-unmap <C-Y>
-
-" C-Z -- Gvim: undo                                             [All Modes]
-"    Terminal: suspend vim and return to shell       [Normal / Visual Mode]
-if has("gui_running") == 0
-    unmap <C-Z>
-    " Technically <C-Z> still performs undo in Terminal during insert mode
-endif
-
-" C-/ -- Terminal: toggle whether line is commented  [Normal / Visual Mode]
-"   (Only works in terminals where <C-/> is equivalent to <C-_>)
-noremap <silent> <C-_> :call NERDComment(0,"toggle")<CR>
-
-" & -- repeate last `:s` substitute (preserves flags)
-nnoremap & :&&<CR>
-xnoremap & :&&<CR>
-
-" Y -- yank to end of line; see `:help Y`                     [Normal Mode]
-nnoremap Y y$
-
-" Enter key -- insert a new line above the current            [Normal Mode]
-nnoremap <CR> O<Esc>j
-" ...but not in the Command-line window (solution by Ingo Karkat [2])
-autocmd CmdwinEnter * nnoremap <buffer> <CR> <CR>
-" ...nor in the Quickfix window
-autocmd BufReadPost * if &buftype ==# 'quickfix' | nnoremap <buffer> <CR> <CR> | endif
-
-" Ctrl-Tab -- Gvim: switch to next tab                        [Normal Mode]
-nnoremap <silent> <C-Tab> :tabnext<CR>
-
-" Ctrl-Shift-Tab -- Gvim: switch to previous tab              [Normal Mode]
-nnoremap <silent> <C-S-Tab> :tabprev<CR>
-
-" j -- move down one line on the screen              [Normal / Visual Mode]
-nnoremap j gj
-vnoremap j gj
-
-" gj -- move down one line in the file               [Normal / Visual Mode]
-nnoremap gj j
-vnoremap gj j
-
-" k -- move up one line on the screen                [Normal / Visual Mode]
-nnoremap k gk
-vnoremap k gk
-
-" gk -- move up one line in the file                 [Normal / Visual Mode]
-nnoremap gk k
-vnoremap gk k
-
-" > -- shift selection rightwards (preserve selection)        [Visual Mode]
-vnoremap > >gv
-
-" < -- shift selection leftwards (preserve selection)         [Visual Mode]
-vnoremap < <gv
-
-" Tab -- indent at beginning of line, otherwise autocomplete  [Insert Mode]
-inoremap <silent> <Tab> <C-R>=DwiwITab()<cr>
-inoremap <silent> <S-Tab> <C-N>
-
-" Taken from Gary Bernhardt's vimrc [1]
-function! DwiwITab()
-    let col = col('.') - 1
-    if !col || getline('.')[col - 1] !~ '\k'
-        return "\<tab>"
-    else
-        return "\<c-p>"
-    endif
-endfunction
-
 
 " ###### Settings ######
 
@@ -211,6 +123,96 @@ set wildmode=list:longest
 " * ttimeoutlen100
 " * viminfo
 " * wildmenu
+
+
+" ###### Key Bindings ######
+
+" Load Windows keybindings on all platforms except OS-X GUI
+"   Maps the usual suspects: Ctrl-{A,C,S,V,X,Y,Z}
+if has("gui_macvim") == 0
+    source $VIMRUNTIME/mswin.vim
+endif
+
+" C-V -- Gvim: paste                                            [All Modes]
+"    Terminal: enter Visual Block mode               [Normal / Visual Mode]
+"    Terminal: insert literal character                       [Insert Mode]
+" C-Q -- Gvim: enter Visual Block mode               [Normal / Visual Mode]
+"        Gvim: insert literal character                       [Insert Mode]
+if has("gui_running") == 0
+    unmap <C-V>
+    iunmap <C-V>
+endif
+
+" C-Y -- scroll window upwards                       [Normal / Visual Mode]
+unmap <C-Y>
+
+" C-Z -- Gvim: undo                                             [All Modes]
+"    Terminal: suspend vim and return to shell       [Normal / Visual Mode]
+if has("gui_running") == 0
+    unmap <C-Z>
+    " Technically <C-Z> still performs undo in Terminal during insert mode
+endif
+
+" C-/ -- Terminal: toggle whether line is commented  [Normal / Visual Mode]
+"   (Only works in terminals where <C-/> is equivalent to <C-_>)
+noremap <silent> <C-_> :call NERDComment(0,"toggle")<CR>
+
+" & -- repeate last `:s` substitute (preserves flags)
+nnoremap & :&&<CR>
+xnoremap & :&&<CR>
+
+" Y -- yank to end of line; see `:help Y`                     [Normal Mode]
+nnoremap Y y$
+
+" Enter key -- insert a new line above the current            [Normal Mode]
+nnoremap <CR> O<Esc>j
+" ...but not in the Command-line window (solution by Ingo Karkat [2])
+autocmd CmdwinEnter * nnoremap <buffer> <CR> <CR>
+" ...nor in the Quickfix window
+autocmd BufReadPost * if &buftype ==# 'quickfix' | nnoremap <buffer> <CR> <CR> | endif
+
+" Ctrl-Tab -- Gvim: switch to next tab                        [Normal Mode]
+nnoremap <silent> <C-Tab> :tabnext<CR>
+
+" Ctrl-Shift-Tab -- Gvim: switch to previous tab              [Normal Mode]
+nnoremap <silent> <C-S-Tab> :tabprev<CR>
+
+" j -- move down one line on the screen              [Normal / Visual Mode]
+nnoremap j gj
+vnoremap j gj
+
+" gj -- move down one line in the file               [Normal / Visual Mode]
+nnoremap gj j
+vnoremap gj j
+
+" k -- move up one line on the screen                [Normal / Visual Mode]
+nnoremap k gk
+vnoremap k gk
+
+" gk -- move up one line in the file                 [Normal / Visual Mode]
+nnoremap gk k
+vnoremap gk k
+
+" > -- shift selection rightwards (preserve selection)        [Visual Mode]
+vnoremap > >gv
+
+" < -- shift selection leftwards (preserve selection)         [Visual Mode]
+vnoremap < <gv
+
+" Tab -- indent at beginning of line, otherwise autocomplete  [Insert Mode]
+inoremap <silent> <Tab> <C-R>=DwiwITab()<cr>
+inoremap <silent> <S-Tab> <C-N>
+
+" Taken from Gary Bernhardt's vimrc [1]
+function! DwiwITab()
+    let col = col('.') - 1
+    if !col || getline('.')[col - 1] !~ '\k'
+        return "\<tab>"
+    else
+        return "\<c-p>"
+    endif
+endfunction
+
 
 augroup END
 
