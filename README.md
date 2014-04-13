@@ -55,9 +55,17 @@ include just the **dwiw2015.vim** plug-in by adding the following line to your
 
     Bundle 'mkropat/vim-dwiw2015'
 
-And then run the following inside Vim:
+And then run the following from Vim:
 
     :BundleInstall
+
+## Updating
+
+If you've already installed **vim-dwiw2015**, you can update the **dwiw2015.vim**
+plug-in and all other installed plugins to the latest version by running the
+following from Vim:
+
+    :BundleUpdate
 
 ## Default Settings
 
