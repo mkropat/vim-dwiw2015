@@ -118,11 +118,11 @@ function InstallOrUpdate-Bundles {
     Write-Output "Calling Vundle's :BundleInstall!"
     try {
         # Try to find gvim.exe in $env:Path or in App Paths
-        Start-Process gvim -ArgumentList -u,$loader_file_path,+BundleInstall!,+qall
+        Start-Process gvim -ArgumentList "-u,$loader_file_path,+BundleInstall!,+qall"
     } catch {
         try {
             # Failing that, try to locate it manually
-            Start-Process (Get-GvimExePath) -ArgumentList -u,$loader_file_path,+BundleInstall!,+qall
+            Start-Process (Get-GvimExePath) -ArgumentList "-u,$loader_file_path,+BundleInstall!,+qall"
         } catch {
             throw "Unable to locate gvim.exe"
         }
