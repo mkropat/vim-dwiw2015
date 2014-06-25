@@ -116,13 +116,14 @@ function EnsureAdded-VimrcHook {
 
 function InstallOrUpdate-Bundles {
     Write-Output "Calling Vundle's :BundleInstall!"
+    $gvim_args = @( "-u", "`"$loader_file_path`"", "+BundleInstall!", "+qall" )
     try {
         # Try to find gvim.exe in $env:Path or in App Paths
-        Start-Process gvim -ArgumentList "-u,$loader_file_path,+BundleInstall!,+qall"
+        Start-Process gvim -ArgumentList $gvim_args
     } catch {
         try {
             # Failing that, try to locate it manually
-            Start-Process (Get-GvimExePath) -ArgumentList "-u,$loader_file_path,+BundleInstall!,+qall"
+            Start-Process (Get-GvimExePath) -ArgumentList $gvim_args
         } catch {
             throw "Unable to locate gvim.exe"
         }
