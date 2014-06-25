@@ -3,12 +3,12 @@
   <metadata>
     <id>vim-dwiw2015</id>
     <title>vim-dwiw2015</title>
-    <version>0.2</version>
+    <version>0.3</version>
     <authors>Michael Kropat</authors>
     <summary>Minimal Vim Distribution - Do What I Want In 2015</summary>
     <description>A minimal Vim distribution. Sets up Vim with the sensible defaults that you'd expect from a modern text editor.
 Benefits at a glance:
-* No cruft in your `.vimrc`
+* No cruft in your `_vimrc`
 * Default settings are cleanly segregated into a plug-in
 * Modern plug-in management with Vundle
 * Includes a *small*, curated set of plug-ins to provide modern text editor functionality
@@ -21,10 +21,13 @@ See the Project Site for more details.
     <iconUrl>https://raw.github.com/mkropat/vim-dwiw2015/master/chocolatey/vim48x48.png</iconUrl>
     <dependencies>
       <dependency id="ag" version="0.18.1" />
-      <dependency id="git" version="1.8" />
+      <dependency id="git" version="1.9.4" />
       <dependency id="vim" version="7.4" />
     </dependencies>
-    <releaseNotes>0.2 - Bundle The Silver Searcher</releaseNotes>
+    <releaseNotes>
+      0.3 - Fix ArgumentList error in bootstrap.ps1
+      0.2 - Bundle The Silver Searcher
+    </releaseNotes>
   </metadata>
   <files>
     <file src="tools\**" target="tools" />
