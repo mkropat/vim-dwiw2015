@@ -13,12 +13,17 @@ endif
 augroup dwiw
 autocmd!
 
+if has('win32')
+  let s:vimfiles = $HOME . '/vimfiles'
+else
+  let s:vimfiles = $HOME . '/.vim'
+endif
 
 " ###### Settings ######
 
 " backup -- when overwriting a file, take a backup copy
 set backup
-set backupdir=~/.vim/tmp/backup//
+let &backupdir = s:vimfiles . '/tmp/backup//'
 if !isdirectory(expand(&backupdir))
     call mkdir(expand(&backupdir), "p")
 endif
@@ -76,7 +81,7 @@ set splitright
 "   Disabled since it's so rare and any important file is version controlled
 "   (Avoids annoying "recover swap file??" questions)
 set noswapfile
-set directory=~/.vim/tmp/swap//
+let &directory = s:vimfiles . '/tmp/swap//'
 if !isdirectory(expand(&directory))
     call mkdir(expand(&directory), "p")
 endif
@@ -84,7 +89,7 @@ endif
 " undofile -- keep a file to persist undo history after file is closed
 if has("persistent_undo") == 1
     set undofile
-    set undodir=~/.vim/tmp/undo//
+    let &undodir = s:vimfiles . '/tmp/undo//'
     if !isdirectory(expand(&undodir))
         call mkdir(expand(&undodir), "p")
     endif
