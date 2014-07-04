@@ -6,8 +6,14 @@
 # `bootstrap.ps1` script is safe — it simply resumes the installation and
 # checks for updates on any plug-ins already installed.
 
-$myvimrc_path      = Join-Path $env:UserProfile _vimrc
-$myvimfiles_path   = Join-Path $env:UserProfile vimfiles
+if (Test-Path Env:Home) {
+    $home_path = $Env:Home
+} else {
+    $home_path = $Home
+}
+
+$myvimrc_path      = Join-Path $home_path _vimrc
+$myvimfiles_path   = Join-Path $home_path vimfiles
 $myvimfiles_tlde   = '~/vimfiles'
 $loader_file_path  = Join-Path $myvimfiles_path dwiw-loader.vim
 $loader_file_tlde  = "$myvimfiles_tlde/dwiw-loader.vim"
@@ -21,16 +27,15 @@ $vundle_tlde       = "$bundle_tlde/vundle"
 function main {
     EnsureInstalled-Vundle
 
-    # Create `$env:UserProfile\vim\dwiw-loader.vim` script to load Vundle and
-    # then call `bundles.vim`. Do not modify the loader file.
+    # Create `~\vimfiles\dwiw-loader.vim` script to load Vundle and then call
+    # `bundles.vim`. Do not modify the loader file.
     EnsureCreated-LoaderFile
 
-    # Create `$env:UserProfile\vim\bundles.vim` script, which contains a list
-    # of Vundle plug-ins. Feel free to make local modifications to this file.
+    # Create `~\vimfiles\bundles.vim` script, which contains a list of Vundle
+    # plug-ins. Feel free to make local modifications to this file.
     EnsurePopulated-BundlesFile
 
-    # Prepand a one-line hook in `$env:UserProfile/_vimrc` to call
-    # `dwiw-loader.vim`.
+    # Prepand a one-line hook in `~\_vimrc` to call `dwiw-loader.vim`.
     EnsureAdded-VimrcHook
 
     InstallOrUpdate-Bundles
@@ -118,7 +123,7 @@ function InstallOrUpdate-Bundles {
     Write-Output "Calling Vundle's :BundleInstall!"
     $gvim_args = @( "-u", "`"$loader_file_path`"", "+BundleInstall!", "+qall" )
     try {
-        # Try to find gvim.exe in $env:Path or in App Paths
+        # Try to find gvim.exe in $Env:Path or in App Paths
         Start-Process gvim -ArgumentList $gvim_args
     } catch {
         try {
