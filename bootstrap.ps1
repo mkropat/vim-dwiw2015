@@ -38,7 +38,7 @@ function main {
     # Prepand a one-line hook in `~\_vimrc` to call `dwiw-loader.vim`.
     EnsureAdded-VimrcHook
 
-    InstallOrUpdate-Bundles
+    InstallOrUpdate-Plugins
 }
 
 function EnsureInstalled-Vundle {
@@ -87,11 +87,15 @@ function EnsureCreated-LoaderFile {
 
 function EnsurePopulated-BundlesFile {
     try {
-        $old_lines = Get-Content $bundles_file_path -ErrorAction Stop
+        $existing_lines = Get-Content $bundles_file_path -ErrorAction Stop
     } catch {
         Write-Output "Creating bundles file at $bundles_file_path"
-        $old_lines = @()
+        $existing_lines = @()
     }
+
+    # Migrate from old Vundle interface to new interface
+    $existing_lines = $existing_lines | foreach { $_ -replace '^Bundle','Plugin' }
+
     $bundles =
         'gmarik/vundle',
         'tpope/vim-sensible',
@@ -101,8 +105,8 @@ function EnsurePopulated-BundlesFile {
         'rking/ag.vim',
         'scrooloose/nerdcommenter',
         'tpope/vim-sleuth'
-    $lines_to_add = $bundles | %{ "Bundle '$_'" }
-    $lines = $old_lines + $lines_to_add | Select-Object -Unique
+    $lines_to_add = $bundles | %{ "Plugin '$_'" }
+    $lines = $existing_lines + $lines_to_add | Select-Object -Unique
     [System.IO.File]::WriteAllLines($bundles_file_path, $lines) # Vim chokes on BOM outputted by Out-File
 }
 
@@ -119,9 +123,9 @@ function EnsureAdded-VimrcHook {
     }
 }
 
-function InstallOrUpdate-Bundles {
-    Write-Output "Calling Vundle's :BundleInstall!"
-    $gvim_args = @( "-u", "`"$loader_file_path`"", "+BundleInstall!", "+qall" )
+function InstallOrUpdate-Plugins {
+    Write-Output "Calling Vundle's :PluginInstall!"
+    $gvim_args = @( "-u", "`"$loader_file_path`"", "+PluginInstall!", "+qall" )
     try {
         # Try to find gvim.exe in $Env:Path or in App Paths
         Start-Process gvim -ArgumentList $gvim_args

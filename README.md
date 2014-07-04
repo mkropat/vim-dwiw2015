@@ -53,11 +53,11 @@ If you already have Vundle set up and the plug-ins you want installed, you can
 include just the **dwiw2015.vim** plug-in by adding the following line to your
 `.vimrc`:
 
-    Bundle 'mkropat/vim-dwiw2015'
+    Plugin 'mkropat/vim-dwiw2015'
 
 And then run the following from Vim:
 
-    :BundleInstall
+    :PluginInstall
 
 ## Updating
 
@@ -65,7 +65,7 @@ If you've already installed **vim-dwiw2015**, you can update the **dwiw2015.vim*
 plug-in and all other installed plugins to the latest version by running the
 following from Vim:
 
-    :BundleUpdate
+    :PluginUpdate
 
 ## Default Settings
 
@@ -152,10 +152,10 @@ characters (which are present in any font):
 Install packages straight from Vim at any time with
 [Vundle](https://github.com/gmarik/Vundle.vim).  For example, to install Tim
 Pope's fantastic Git wrapper, available on Github at
-[tpope/vim-fugitive](https://github.com/tpope/vim-fugitive), simply add `Bundle
-'tpope/vim-fugitive'` to your `.vimrc` and run `:BundleInstall`.
+[tpope/vim-fugitive](https://github.com/tpope/vim-fugitive), simply add `Plugin
+'tpope/vim-fugitive'` to your `.vimrc` and run `:PluginInstall`.
 
-To check for updates on all installed plugins, run `:BundleUpdate`.
+To check for updates on all installed plugins, run `:PluginUpdate`.
 
 ### Fuzzy-Filename Open
 
