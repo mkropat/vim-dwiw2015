@@ -6,6 +6,11 @@
 # `bootstrap.ps1` script is safe — it simply resumes the installation and
 # checks for updates on any plug-ins already installed.
 
+
+param (
+    [switch]$Uninstall = $false
+)
+
 if (Test-Path Env:Home) {
     $home_path = $Env:Home
 } else {
@@ -25,6 +30,14 @@ $vundle_path       = Join-Path $bundle_path vundle
 $vundle_tlde       = "$bundle_tlde/vundle"
 
 function main {
+    if ($Uninstall) {
+        Uninstall-Dwiw
+    } else {
+        Install-Dwiw
+    }
+}
+
+function Install-Dwiw {
     EnsureInstalled-Vundle
 
     # Create `~\vimfiles\dwiw-loader.vim` script to load Vundle and then call
@@ -39,6 +52,15 @@ function main {
     EnsureAdded-VimrcHook
 
     InstallOrUpdate-Plugins
+}
+
+function Uninstall-Dwiw {
+    Remove-VimrcHook
+    Remove-Item $loader_file_path -ErrorAction Silent
+
+    Remove-DwiwBundle
+    $plugin_path = Join-Path $bundle_path 'vim-dwiw2015'
+    Remove-Item -Recurse $plugin_path -Force -ErrorAction Silent
 }
 
 function EnsureInstalled-Vundle {
@@ -107,7 +129,17 @@ function EnsurePopulated-BundlesFile {
         'tpope/vim-sleuth'
     $lines_to_add = $bundles | %{ "Plugin '$_'" }
     $lines = $existing_lines + $lines_to_add | Select-Object -Unique
-    [System.IO.File]::WriteAllLines($bundles_file_path, $lines) # Vim chokes on BOM outputted by Out-File
+    $lines | Out-FileVimSafe $bundles_file_path
+}
+
+function Remove-DwiwBundle {
+    try {
+        Get-Content $bundles_file_path -ErrorAction Stop |
+            Where-Object { $_ -notmatch "^Plugin 'mkropat/vim-dwiw2015'$" } |
+            Out-FileVimSafe $bundles_file_path
+    } catch {
+        # Oh well
+    }
 }
 
 function EnsureAdded-VimrcHook {
@@ -119,7 +151,17 @@ function EnsureAdded-VimrcHook {
     }
     if (! ($lines | Select-String -Pattern "source $loader_file_tlde")) {
         $lines = ,"source $loader_file_tlde" + $lines
-        [System.IO.File]::WriteAllLines($myvimrc_path, $lines) # Vim chokes on BOM written by Out-File
+        $lines | Out-FileVimSafe $myvimrc_path
+    }
+}
+
+function Remove-VimrcHook {
+    try {
+        Get-Content $myvimrc_path -ErrorAction Stop |
+            Where-Object { $_ -notmatch "^source $loader_file_tlde$" } |
+            Out-FileVimSafe $myvimrc_path
+    } catch {
+        # Oh well
     }
 }
 
@@ -160,6 +202,15 @@ function Get-ScriptVersion($script_path) {
         select -ExpandProperty Groups |
         select -Index 1 |
         select -ExpandProperty Value
+}
+
+function Out-FileVimSafe {
+    param (
+        [string]$FilePath
+    )
+
+    # Vim chokes on BOM outputted by Out-File
+    [System.IO.File]::WriteAllLines($FilePath, @($input))
 }
 
 main
