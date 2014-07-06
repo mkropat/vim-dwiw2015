@@ -119,6 +119,9 @@ ensure_bundles_file_populated() {
         msg "Creating bundles file at $bundles_file_path"
     fi
 
+    # Migrate from old Vundle interface to new interface
+    sed -i 's/^Bundle /Plugin /' "$bundles_file_path"
+
     ensure_bundle_line 'gmarik/vundle'
 
     ensure_bundle_line 'tpope/vim-sensible'
@@ -133,7 +136,7 @@ ensure_bundles_file_populated() {
 
 ensure_bundle_line() {
     if ! fgrep -qe "$1" "$bundles_file_path" 2>/dev/null; then
-        printf "Bundle '%s'\n" "$1" >>"$bundles_file_path"
+        printf "Plugin '%s'\n" "$1" >>"$bundles_file_path"
     fi
 }
 
@@ -146,8 +149,8 @@ ensure_vimrc_hook_exists() {
 }
 
 install_or_update_bundles() {
-    msg "Calling Vundle's :BundleInstall!"
-    echo | vim -u "$loader_file_path" +BundleInstall! +qall - ||
+    msg "Calling Vundle's :PluginInstall!"
+    echo | vim -u "$loader_file_path" +PluginInstall! +qall - ||
         die "Error: unable to start vim"
 }
 
