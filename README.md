@@ -147,6 +147,16 @@ characters (which are present in any font):
 
 ## Modern Features
 
+**vim-dwiw2015** ships with a number of plug-ins out-of-the-box:
+
+- [ag.vim](https://github.com/rking/ag.vim) — like `grep`, but better
+- [ctrlp.vim](https://github.com/kien/ctrlp.vim) — fuzzy file, buffer, mru, tag, etc finder
+- [NERD Commenter](https://github.com/scrooloose/nerdcommenter)
+- [vim-airline](https://github.com/bling/vim-airline) — lean & mean status/tabline for Vim that's light as air
+- [vim-sensible](https://github.com/tpope/vim-sensible) — defaults everyone can agree on
+- [vim-sleuth](https://github.com/tpope/vim-sleuth) — heuristically set buffer options
+- [Vundle](https://github.com/gmarik/Vundle.vim) — the plug-in manager for Vim
+
 ### Plug-in Management
 
 Install packages straight from Vim at any time with
