@@ -125,7 +125,7 @@ function EnsurePopulated-BundlesFile {
         'bling/vim-airline',
         'kien/ctrlp.vim',
         'rking/ag.vim',
-        'scrooloose/nerdcommenter',
+        'tpope/vim-commentary',
         'tpope/vim-sleuth'
     $lines_to_add = $bundles | %{ "Plugin '$_'" }
     $lines = $existing_lines + $lines_to_add | Select-Object -Unique

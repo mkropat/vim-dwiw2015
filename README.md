@@ -151,8 +151,8 @@ characters (which are present in any font):
 
 - [ag.vim](https://github.com/rking/ag.vim) — like `grep`, but better
 - [ctrlp.vim](https://github.com/kien/ctrlp.vim) — fuzzy file, buffer, mru, tag, etc finder
-- [NERD Commenter](https://github.com/scrooloose/nerdcommenter)
 - [vim-airline](https://github.com/bling/vim-airline) — lean & mean status/tabline for Vim that's light as air
+- [vim-commentary](https://github.com/tpope/vim-commentary) — comment and un-comment lines easily
 - [vim-sensible](https://github.com/tpope/vim-sensible) — defaults everyone can agree on
 - [vim-sleuth](https://github.com/tpope/vim-sleuth) — heuristically set buffer options
 - [Vundle](https://github.com/gmarik/Vundle.vim) — the plug-in manager for Vim
@@ -204,14 +204,16 @@ what it offers.
 
 ### Toggle Line Commenting With a Single Keypress
 
-Commenting out a block of code shouldn't be any harder than selecting it and
-pressing a key.  Fortunately the [NERD Commenter
-plug-in](https://github.com/scrooloose/nerdcommenter) offers just that.
+(Terminal Only) Press <kbd>Ctrl-/</kbd> to comment out the current line (or
+un-comment it, if it's currently commented out).  Select multiple lines in
+Visual mode and press <kbd>Ctrl-/</kbd> to comment them all out.
 
-To toggle commenting, use the shortcut <kbd>Ctrl-/</kbd> on the terminal (note:
-this doesn't work in all terminals).  Or, failing that, use the plug-in's
-default shortcut: <kbd>Leader</kbd>+<kbd>c</kbd>+<kbd>Space</kbd>.  (The default
-<kbd>Leader</kbd> key is <kbd>\\</kbd>.)
+(All Versions) Or more powerfully, use Vim motions with <kbd>gc</kbd> to
+comment out any sized block of code:
+
+- <kbd>gcap</kbd> — comment out the current paragraph
+- <kbd>gcG</kbd> — comment out the rest of the file
+- etc.
 
 ### Indent Settings Auto-Detection
 

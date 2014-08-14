@@ -165,7 +165,7 @@ endif
 
 " C-/ -- Terminal: toggle whether line is commented  [Normal / Visual Mode]
 "   (Only works in terminals where <C-/> is equivalent to <C-_>)
-noremap <silent> <C-_> :call NERDComment(0,"toggle")<CR>
+noremap <silent> <C-_> :Commentary<CR>
 
 " & -- repeate last `:s` substitute (preserves flags)
 nnoremap & :&&<CR>

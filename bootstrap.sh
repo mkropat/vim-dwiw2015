@@ -130,7 +130,7 @@ ensure_bundles_file_populated() {
     ensure_bundle_line 'bling/vim-airline'
     ensure_bundle_line 'kien/ctrlp.vim'
     ensure_bundle_line 'rking/ag.vim'
-    ensure_bundle_line 'scrooloose/nerdcommenter'
+    ensure_bundle_line 'tpope/vim-commentary'
     ensure_bundle_line 'tpope/vim-sleuth'
 }
 
