@@ -120,7 +120,7 @@ ensure_bundles_file_populated() {
     fi
 
     # Migrate from old Vundle interface to new interface
-    sed -i 's/^Bundle /Plugin /' "$bundles_file_path"
+    perl -pi -e 's/^Bundle /Plugin /' "$bundles_file_path"
 
     ensure_bundle_line 'gmarik/vundle'
 
