@@ -141,6 +141,9 @@ set wildmode=list:longest
 "   Maps the usual suspects: Ctrl-{A,C,S,V,X,Y,Z}
 if has("gui_macvim") == 0
     source $VIMRUNTIME/mswin.vim
+
+    " Let arrow keys work with visual select
+    set keymodel-=stopsel
 endif
 
 " C-V -- Gvim: paste                                            [All Modes]
