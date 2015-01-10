@@ -163,6 +163,8 @@ To update all installed plugins to the latest version, run `:PluginUpdate`.
 
 ### Fuzzy-Filename Open
 
+![Screenshot](http://i.imgur.com/ElV0Tjr.png)
+
 Vim's built-in file opener and swtiching (see `:help :e` and `:help :b`) works
 fine, but for truly fast file-switching you need a fuzzy-file opener, like the
 [ctrlp plug-in](http://kien.github.io/ctrlp.vim/).  Pressing <kbd>Ctrl-P</kbd>
@@ -171,6 +173,8 @@ part of the filename you're interested (`partial/paths` work too) and press
 <kbd>Enter</kbd> to open the file.
 
 ### Find In Files
+
+![Screenshot](http://i.imgur.com/4N8XtLR.png)
 
 Vim already provides an interface to the `grep` command with `:grep`, however
 the `grep` command is less than ideal for searching most directories, because
@@ -188,6 +192,8 @@ Fortunately, packages exist for all the major platforms (called perhaps
 for you on Windows by Chocolatey!
 
 ### Informative Statusline
+
+![Screenshot](http://i.imgur.com/3NcgspK.png)
 
 Vim-dwiw includes the [vim-airline
 plug-in](https://github.com/bling/vim-airline), which packs a whole lot of
