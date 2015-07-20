@@ -31,6 +31,11 @@ endif
 " cursorline -- highlight the entire line the cursor is on
 set cursorline
 
+" guioptions -- disable GUI elements to prevent unintended window resizing
+if has("win32") && has("gui_running")
+    set guioptions-=e
+endif
+
 " hidden -- let user switch away from (hide) buffers with unsaved changes
 set hidden
 
