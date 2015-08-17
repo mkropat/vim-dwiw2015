@@ -151,25 +151,21 @@ endif
 "    Terminal: insert literal character                       [Insert Mode]
 " C-Q -- Gvim: enter Visual Block mode               [Normal / Visual Mode]
 "        Gvim: insert literal character                       [Insert Mode]
-if has("gui_running") == 0
-    if ! empty(mapcheck('<C-V>'))
-        unmap <C-V>
-        iunmap <C-V>
-    endif
+if has("gui_running") == 0 && ! empty(maparg('<C-V>'))
+    unmap <C-V>
+    iunmap <C-V>
 endif
 
 " C-Y -- scroll window upwards                       [Normal / Visual Mode]
-if ! empty(mapcheck('<C-Y>'))
+if ! empty(maparg('<C-Y>'))
     unmap <C-Y>
 endif
 
 " C-Z -- Gvim: undo                                             [All Modes]
 "    Terminal: suspend vim and return to shell       [Normal / Visual Mode]
-if has("gui_running") == 0
-    if ! empty(mapcheck('<C-Z>'))
-        unmap <C-Z>
-        " Technically <C-Z> still performs undo in Terminal during insert mode
-    endif
+if has("gui_running") == 0 && ! empty(maparg('<C-Z>'))
+    unmap <C-Z>
+    " Technically <C-Z> still performs undo in Terminal during insert mode
 endif
 
 " C-/ -- Terminal: toggle whether line is commented  [Normal / Visual Mode]
