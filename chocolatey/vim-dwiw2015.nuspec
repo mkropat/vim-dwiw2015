@@ -3,7 +3,7 @@
   <metadata>
     <id>vim-dwiw2015</id>
     <title>vim-dwiw2015</title>
-    <version>0.4</version>
+    <version>0.5</version>
     <authors>Michael Kropat</authors>
     <summary>Minimal Vim Distribution - Do What I Want In 2015</summary>
     <description>A minimal Vim distribution. Sets up Vim with the sensible defaults that you'd expect from a modern text editor.
@@ -15,7 +15,7 @@ Benefits at a glance:
 See the Project Site for more details.
 </description>
     <projectUrl>https://github.com/mkropat/vim-dwiw2015</projectUrl>
-    <tags>vim distribution editor</tags>
+    <tags>vim distribution editor admin</tags>
     <licenseUrl>http://vimdoc.sourceforge.net/htmldoc/uganda.html</licenseUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <iconUrl>https://raw.github.com/mkropat/vim-dwiw2015/master/chocolatey/vim48x48.png</iconUrl>
@@ -25,6 +25,7 @@ See the Project Site for more details.
       <dependency id="vim" version="7.4" />
     </dependencies>
     <releaseNotes>
+      0.5 - Add "Edit with Vim" context menu action
       0.4 - Update to new Vundle interface
           - Add `cuninst` support
           - Install to correct `%HOME%` folder
