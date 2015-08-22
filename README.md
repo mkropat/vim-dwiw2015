@@ -52,10 +52,13 @@ it manually from the PowerShell console:
 ### Plug-in Only
 
 If you already have Vundle set up and the plug-ins you want installed, you can
-include just the **dwiw2015.vim** plug-in by adding the following line to your
+include just the **dwiw2015.vim** plug-in by adding the following lines to your
 `.vimrc`:
 
+    Plugin 'tpope/vim-sensible'
     Plugin 'mkropat/vim-dwiw2015'
+
+(dwiw2015.vim pairs best with vim-sensible)
 
 And then run the following from Vim:
 
