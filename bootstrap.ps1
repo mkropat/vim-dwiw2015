@@ -38,6 +38,8 @@ function main {
 }
 
 function Install-Dwiw {
+    Ensure-GitOnPath
+
     EnsureInstalled-Vundle
 
     # Create `~\vimfiles\dwiw-loader.vim` script to load Vundle and then call
@@ -63,13 +65,22 @@ function Uninstall-Dwiw {
     Remove-Item -Recurse $plugin_path -Force -ErrorAction Silent
 }
 
-function EnsureInstalled-Vundle {
-    if (Test-Path -LiteralPath (Join-Path $vundle_path '.git') -PathType Container) {
+function Ensure-GitOnPath {
+    if (Get-Command git -ErrorAction SilentlyContinue) {
         return
     }
 
-    if (! (Get-Command -Name git -CommandType Application -ErrorAction SilentlyContinue)) {
-        throw "Unable to locate git.exe"
+    $gitPath = Get-GitPathFromRegistry
+    if (-not $gitPath) {
+        throw 'Unable to locate git.exe'
+    }
+
+    Add-EnvPath -Container User (Split-Path $gitPath)
+}
+
+function EnsureInstalled-Vundle {
+    if (Test-Path -LiteralPath (Join-Path $vundle_path '.git') -PathType Container) {
+        return
     }
 
     Write-Output "Installing Vundle into $vundle_path"
@@ -211,6 +222,47 @@ function Out-FileVimSafe {
 
     # Vim chokes on BOM outputted by Out-File
     [System.IO.File]::WriteAllLines($FilePath, @($input))
+}
+
+function Get-GitPathFromRegistry {
+    $gitDir = Get-ItemProperty HKLM:\SOFTWARE\GitForWindows InstallPath -ErrorAction SilentlyContinue |
+        select -ExpandProperty InstallPath -ErrorAction SilentlyContinue
+    if ($gitDir) {
+        @('bin', 'usr\bin') |
+            foreach { Join-Path (Join-Path $gitDir $_) 'git.exe' } |
+            where { Test-Path $_ } |
+            select -First 1
+    }
+}
+
+function Add-EnvPath {
+    param(
+        [Parameter(Mandatory=$true)]
+        [string] $Path,
+
+        [ValidateSet('Machine', 'User', 'Session')]
+        [string] $Container = 'Session'
+    )
+
+    if ($Container -ne 'Session') {
+        $containerMapping = @{
+            Machine = [EnvironmentVariableTarget]::Machine
+            User = [EnvironmentVariableTarget]::User
+        }
+        $containerType = $containerMapping[$Container]
+
+        $persistedPaths = [Environment]::GetEnvironmentVariable('Path', $containerType) -split ';'
+        if ($persistedPaths -notcontains $Path) {
+            $persistedPaths = $persistedPaths + $Path | where { $_ }
+            [Environment]::SetEnvironmentVariable('Path', $persistedPaths -join ';', $containerType)
+        }
+    }
+
+    $envPaths = $env:Path -split ';'
+    if ($envPaths -notcontains $Path) {
+        $envPaths = $envPaths + $Path | where { $_ }
+        $env:Path = $envPaths -join ';'
+    }
 }
 
 main
