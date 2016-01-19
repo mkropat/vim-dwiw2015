@@ -111,10 +111,10 @@ runtime! plugin/dwiw2015.vim
 function EnsureCreated-LoaderFile {
     if (! (Test-Path -LiteralPath $loader_file_path)) {
         Write-Output "Creating loader script at $loader_file_path"
-        $dwiw_loader_script | Out-File -Encoding ascii $loader_file_path
+        $dwiw_loader_script | Out-FileVimSafe $loader_file_path
     } elseif ((Get-ScriptVersion $loader_file_path) -ne '1.1') {
         Write-Output "Updating loader script at $loader_file_path to version $loader_version"
-        $dwiw_loader_script | Out-File -Encoding ascii $loader_file_path
+        $dwiw_loader_script | Out-FileVimSafe $loader_file_path
     }
 }
 
