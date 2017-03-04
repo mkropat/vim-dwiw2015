@@ -135,7 +135,7 @@ function EnsurePopulated-BundlesFile {
         'mkropat/vim-dwiw2015',
         'bling/vim-airline',
         'ctrlpvim/ctrlp.vim',
-        'rking/ag.vim',
+        'mileszs/ack.vim',
         'tpope/vim-commentary',
         'tpope/vim-sleuth'
     $lines_to_add = $bundles | %{ "Plugin '$_'" }
