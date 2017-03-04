@@ -159,7 +159,7 @@ Pope's fantastic Git wrapper, available on Github at
 following line to your `.vimrc`:
 
     Plugin 'tpope/vim-fugitive'
-    
+
 Then run `:PluginInstall`.
 
 To update all installed plugins to the latest version, run `:PluginUpdate`.
@@ -186,8 +186,9 @@ files, version control internals, etc.).
 
 A better alternative is [The Silver
 Searcher](http://geoff.greer.fm/2011/12/27/the-silver-searcher-better-than-ack/)
-a.k.a. `ag`.  Using the [ag.vim plug-in](https://github.com/rking/ag.vim), you
-can search straight from Vim with the command `:Ag <search terms>`.
+a.k.a. `ag`.  Using the [ack.vim plug-in](https://github.com/mileszs/ack.vim)
+(configured for `ag`), you can search straight from Vim with the command `:Ack
+<search terms>`.
 
 Note: before `ag.vim` can be used, the The Silver Searcher must be installed.
 Fortunately, packages exist for all the major platforms (called perhaps

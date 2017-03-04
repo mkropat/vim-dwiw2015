@@ -139,6 +139,11 @@ set wildmode=list:longest
 " * viminfo
 " * wildmenu
 
+" ack.vim: prefer ag over ack (if available)
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+
 
 " ###### Key Bindings ######
 
