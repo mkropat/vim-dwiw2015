@@ -134,7 +134,7 @@ function EnsurePopulated-BundlesFile {
         'tpope/vim-sensible',
         'mkropat/vim-dwiw2015',
         'bling/vim-airline',
-        'kien/ctrlp.vim',
+        'ctrlpvim/ctrlp.vim',
         'rking/ag.vim',
         'tpope/vim-commentary',
         'tpope/vim-sleuth'
