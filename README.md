@@ -2,6 +2,8 @@
 
 *Sensible Defaults For A Modern Text Editor*
 
+__2017/4/23 Update:__ Now that [Vim 8 is out](https://github.com/vim/vim/blob/master/runtime/doc/version8.txt), a number of improvements that this distribution makes no longer make sense (thanks to better defaults and built-in plugin suport). It is unlikely future development will go into dwiw2015.vim, outside of re-working it into a brand new distribution built for Vim 8.
+
 Building on top of [Tim Pope's
 sensible.vim](https://github.com/tpope/vim-sensible/), **vim-dwiw is a minimal
 Vim distribution** that sets up Vim with the behavior and features that you
