@@ -152,6 +152,9 @@ endif
 if has("gui_macvim") == 0
     source $VIMRUNTIME/mswin.vim
 
+    " bad, mswin.vim! bad!
+    silent! nunmap <C-F>
+
     " Let arrow keys work with visual select
     set keymodel-=stopsel
 endif
