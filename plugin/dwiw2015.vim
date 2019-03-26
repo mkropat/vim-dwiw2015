@@ -140,7 +140,7 @@ set wildmode=list:longest
 " * wildmenu
 
 " ack.vim: prefer ag over ack (if available)
-if executable('ag')
+if !exists('g:ackprg') && executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
 
