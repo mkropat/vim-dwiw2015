@@ -1,4 +1,4 @@
-# dwiw2015.vim — Do What I Want In 2015
+# dwiw2015.vim — Vim Do What I Want
 
 *Sensible Defaults For A Modern Text Editor*
 
