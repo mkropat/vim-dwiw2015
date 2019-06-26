@@ -193,11 +193,13 @@ xnoremap & :&&<CR>
 nnoremap Y y$
 
 " Enter key -- insert a new line above the current            [Normal Mode]
-nnoremap <CR> O<Esc>j
-" ...but not in the Command-line window (solution by Ingo Karkat [2])
-autocmd CmdwinEnter * nnoremap <buffer> <CR> <CR>
-" ...nor in the Quickfix window
-autocmd BufReadPost * if &buftype ==# 'quickfix' | nnoremap <buffer> <CR> <CR> | endif
+if empty(maparg('<CR>', 'n'))
+    nnoremap <CR> O<Esc>j
+    " ...but not in the Command-line window (solution by Ingo Karkat [2])
+    autocmd CmdwinEnter * nnoremap <buffer> <CR> <CR>
+    " ...nor in the Quickfix window
+    autocmd BufReadPost * if &buftype ==# 'quickfix' | nnoremap <buffer> <CR> <CR> | endif
+endif
 
 " Ctrl-Tab -- Gvim: switch to next tab                        [Normal Mode]
 nnoremap <silent> <C-Tab> :tabnext<CR>
